@@ -1,0 +1,13 @@
+done:
+    created 100 boxes
+    filled boxes with numbers 1-100
+    shuffling the boxes or 'numbers in boxes'
+
+
+Todo:
+    creating a timer for 10 seconds 
+    provide a message to select either odd or even
+    starting the timer/game
+    adding the score:-
+        10 for right answer -2 for wrong answer 
+    Show the final score in a dialog box
