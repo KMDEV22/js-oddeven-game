@@ -38,12 +38,34 @@ function createBoxes(arr){
     });
 }
 function startTimer(){
+let value = document.querySelector('.timer').textContent
+var intervalCanceler=setInterval(()=>{
+    value= parseInt(value)-1
+    document.querySelector('.timer').textContent=value
+    if (value == 0){
+        clearInterval(intervalCanceler)
+        startGame()
+    }
+
+},1000)
 
 }
 function startGame(){
-
+    console.log('GAME STARTED :D')
+    document.querySelectorAll('.box').forEach((box)=>{
+        box.addEventListener("click",(e)=>{
+            e.target.className +='selected'
+        })
+    
+    })
 }
-function showScore(){
+// function showScore(){
 
+// }
+
+const showScore = () =>{
+    
 }
+
 shuffleNumbers()
+startTimer()
