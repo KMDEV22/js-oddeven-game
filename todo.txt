@@ -1,13 +1,15 @@
-done:
+Done:
     created 100 boxes
-    filled boxes with numbers 1-100
+    filled boxes with numbers 1-25
     shuffling the boxes or 'numbers in boxes'
+    creating a timer for 10 seconds 
+    starting the timer/game
+
+
 
 
 Todo:
-    creating a timer for 10 seconds 
     provide a message to select either odd or even
-    starting the timer/game
     adding the score:-
         10 for right answer -2 for wrong answer 
     Show the final score in a dialog box

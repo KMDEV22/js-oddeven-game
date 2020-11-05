@@ -27,8 +27,8 @@ body{
     box-sizing: content-box;
 }
 .box{
-    width: 9vh;
-    height: 9vh;
+    width: 18vh;
+    height: 18vh;
     border: 2px solid red;
     text-align: center;
     font-size: 1em;
@@ -59,12 +59,35 @@ body{
     background-color: skyblue;
     color: navy;
 }
+.hidden{
+    visibility: hidden;
+}
+.placard{
+    size: 20px;
+    font-family: monospace;
+    border: 2px solid;
+    position: absolute;
+    background: cornsilk;
+    font-size: 30px;
+    padding: 20px;
+
+}
+.placard.initial{
+    /* width: 0;
+    height: 0; */
+    opacity: 0;
+}
     </style>
 </head>
 <body>
+    
     <div class="container">
         <!-- boxes will be created programatically -->
         
+    </div>
+    <div class="placard">
+        Select all xxx numbers. <br>
+        Only 10seconds to Select
     </div>
     <div class="timer">
         10

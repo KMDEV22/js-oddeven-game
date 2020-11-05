@@ -2,7 +2,7 @@
 function shuffleNumbers(){
     arr=[]
     let i=0
-    while(i<100){
+    while(i<25){
         // console.log(i+1, 'is the number')
         i++
         if (i >=0){
@@ -43,6 +43,7 @@ var intervalCanceler=setInterval(()=>{
     value= parseInt(value)-1
     document.querySelector('.timer').textContent=value
     if (value == 0){
+        document.querySelector('.timer').className += ' hidden' 
         clearInterval(intervalCanceler)
         startGame()
     }
@@ -54,18 +55,49 @@ function startGame(){
     console.log('GAME STARTED :D')
     document.querySelectorAll('.box').forEach((box)=>{
         box.addEventListener("click",(e)=>{
-            e.target.className +='selected'
+            if (e.target.className.indexOf('selected')==-1){
+                e.target.className += ' selected'
+            }
         })
     
     })
+    startTimer()
 }
-// function showScore(){
+function showPlacard(){
+    let placardtxt = document.querySelector('.placard').textContent
+    let arr = ['ODD','EVEN']
+let index = +(Math.random()>.5)
+    placardtxt = placardtxt.replace('xxx', arr[index])
+    document.querySelector('.placard').textContent = placardtxt
+    animatePlacard(0,1)
+    setTimeout(()=>{
+        startTimer()
+        animatePlacard(1,0)
+    },5000)
+    setTimeout(()=>{
+        startGame()
+    },5000)
 
-// }
+}
+function animatePlacard(initial,final){
+    document.querySelector('.placard').animate([
+        {
+            opacity:initial,
+        },
+        {
+            opacity:final,
+        }
+
+    ],{
+        duration:1000,
+        fill:'forwards'
+    })
+
+}
 
 const showScore = () =>{
     
 }
 
 shuffleNumbers()
-startTimer()
+showPlacard()
