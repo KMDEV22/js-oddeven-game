@@ -1,3 +1,4 @@
+    let SLECTION_TYPE=''
     var arr=[]
 function shuffleNumbers(){
     arr=[]
@@ -54,20 +55,47 @@ var intervalCanceler=setInterval(()=>{
 function startGame(){
     console.log('GAME STARTED :D')
     document.querySelectorAll('.box').forEach((box)=>{
-        box.addEventListener("click",(e)=>{
-            if (e.target.className.indexOf('selected')==-1){
-                e.target.className += ' selected'
+        box.addEventListener("click",(event)=>{
+            if (event.target.className.indexOf('selected')==-1){
+                event.target.className += ' selected'
+                
+                checkAnswer(+event.target.textContent)
+
             }
         })
     
     })
     startTimer()
 }
+function checkAnswer(txtContent){
+    let correctEl = document.querySelector('.correct')
+    let incorrectEl = document.querySelector('.incorrect')
+    let isCorrect = false
+    if(SELECTION_TYPE =='ODD'){
+        if(txtContent % 2 != 0){
+            isCorrect = true
+        }
+    }else if(SELECTION_TYPE == 'EVEN'){
+            if (txtContent % 2 == 0){
+            isCorrect = true
+            }
+    }
+    if(isCorrect){
+        let currentHt = +correctEl.style.height.toString().replace('%','')
+        currentHt += (100/13)
+        correctEl.style.height =currentHt +'%'
+    }else {
+        let currentHt = +incorrectEl.style.height.toString().replace('%','')
+        currentHt += (100/13)
+        incorrectEl.style.height=currentHt +'%'}
+    
+}
 function showPlacard(){
     let placardtxt = document.querySelector('.placard').textContent
     let arr = ['ODD','EVEN']
 let index = +(Math.random()>.5)
-    placardtxt = placardtxt.replace('xxx', arr[index])
+    SELECTION_TYPE = arr[index]
+    placardtxt = placardtxt.replace('xxx', SELECTION_TYPE)
     document.querySelector('.placard').textContent = placardtxt
     animatePlacard(0,1)
     setTimeout(()=>{
@@ -76,6 +104,7 @@ let index = +(Math.random()>.5)
     },5000)
     setTimeout(()=>{
         startGame()
+        document.querySelector('.placard').className+=' hidden'
     },5000)
 
 }

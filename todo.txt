@@ -4,12 +4,14 @@ Done:
     shuffling the boxes or 'numbers in boxes'
     creating a timer for 10 seconds 
     starting the timer/game
+        provide a message to select either odd or even
+        10 for right answer -2 for wrong answer
+
+
 
 
 
 
 Todo:
-    provide a message to select either odd or even
     adding the score:-
-        10 for right answer -2 for wrong answer 
     Show the final score in a dialog box

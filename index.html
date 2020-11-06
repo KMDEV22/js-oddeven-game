@@ -77,6 +77,30 @@ body{
     height: 0; */
     opacity: 0;
 }
+.scorecontainer{
+    border: 2px solid;
+    width: 12vh;
+    height: 40vh;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+}
+.correct{
+    border:1px solid greenyellow;
+    width: 5vh;
+    height: 0%;
+    background: greenyellow;
+}
+.incorrect{
+    border: 1px solid red;
+    width: 5vh;
+    height: 0%;
+    background: red;
+    
+}
     </style>
 </head>
 <body>
@@ -91,6 +115,10 @@ body{
     </div>
     <div class="timer">
         10
+    </div>
+    <div class="scorecontainer">
+        <div class="correct"></div>
+        <div class="incorrect"></div>
     </div>
     
     <script src="./game.js"></script>
