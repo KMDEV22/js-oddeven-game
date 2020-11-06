@@ -46,7 +46,13 @@ var intervalCanceler=setInterval(()=>{
     if (value == 0){
         document.querySelector('.timer').className += ' hidden' 
         clearInterval(intervalCanceler)
-        startGame()
+        // startGame()
+    let correctEl = document.querySelector('.correct')
+        let currentHt = +correctEl.style.height.toString().replace('%','')
+        alert('You Scored '+(currentHt)+'%')
+        document.querySelectorAll('.box').forEach((box)=>{
+            box.removeEventListener("click", onclick)
+        })
     }
 
 },1000)
@@ -55,18 +61,20 @@ var intervalCanceler=setInterval(()=>{
 function startGame(){
     console.log('GAME STARTED :D')
     document.querySelectorAll('.box').forEach((box)=>{
-        box.addEventListener("click",(event)=>{
-            if (event.target.className.indexOf('selected')==-1){
-                event.target.className += ' selected'
-                
-                checkAnswer(+event.target.textContent)
-
-            }
-        })
-    
+        box.addEventListener("click", onclick)
     })
     startTimer()
 }
+
+function onclick(event){
+    if (event.target.className.indexOf('selected')==-1){
+        event.target.className += ' selected'
+        
+        checkAnswer(+event.target.textContent)
+
+    }
+}
+
 function checkAnswer(txtContent){
     let correctEl = document.querySelector('.correct')
     let incorrectEl = document.querySelector('.incorrect')
