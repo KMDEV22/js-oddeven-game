@@ -1,139 +1,155 @@
-    let SLECTION_TYPE=''
-    var arr=[]
-function shuffleNumbers(){
-    arr=[]
-    let i=0
-    while(i<25){
+let SLECTION_TYPE = ''
+var arr = []
+function shuffleNumbers() {
+    arr = []
+    let i = 0
+    while (i < 25) {
         // console.log(i+1, 'is the number')
         i++
-        if (i >=0){
+        if (i >= 0) {
             // debugger
             arr.push(i)
         }
-        if (i>10){
-            let aIndex= Math.floor(Math.random()*arr.length)
+        if (i > 10) {
+            let aIndex = Math.floor(Math.random() * arr.length)
             let a = arr[aIndex]
             let b = arr[i]
             let c = arr[aIndex]
             // a=b
             // b=c
-            arr [aIndex]=b
-            arr [i] = c
+            arr[aIndex] = b
+            arr[i] = c
 
         }
-        
+
     }
     // console.log(arr)
     createBoxes(arr)
 }
-function createBoxes(arr){
+function createBoxes(arr) {
     let container = document.querySelector('.container')
     arr.forEach(i => {
-        if (i>=0){
-            let box=document.createElement('div')
+        if (i >= 0) {
+            let box = document.createElement('div')
             box.className = 'box'
             box.textContent = i
             container.appendChild(box)
         }
-        
+
     });
 }
-function startTimer(){
-let value = document.querySelector('.timer').textContent
-var intervalCanceler=setInterval(()=>{
-    value= parseInt(value)-1
-    document.querySelector('.timer').textContent=value
-    if (value == 0){
-        document.querySelector('.timer').className += ' hidden' 
-        clearInterval(intervalCanceler)
-        // startGame()
-    let correctEl = document.querySelector('.correct')
-        let currentHt = +correctEl.style.height.toString().replace('%','')
-        alert('You Scored '+(currentHt)+'%')
-        document.querySelectorAll('.box').forEach((box)=>{
-            box.removeEventListener("click", onclick)
-        })
-    }
+function startTimer() {
+    let value = document.querySelector('.timer').textContent
+    var intervalCanceler = setInterval(() => {
+        value = parseInt(value) - 1
+        document.querySelector('.timer').textContent = value
+        if (value == 0) {
+            document.querySelector('.timer').className += ' hidden'
+            clearInterval(intervalCanceler)
+            // startGame()
+            let correctEl = document.querySelector('.correct')
+            let currentHt = +correctEl.style.height.toString().replace('%', '')
+            // alert('You Scored '+(currentHt)+'%')
+            showScore(currentHt)
+            document.querySelectorAll('.box').forEach((box) => {
+                box.removeEventListener("click", onclick)
+            })
+        }
 
-},1000)
+    }, 1000)
 
 }
-function startGame(){
+function startGame() {
     console.log('GAME STARTED :D')
-    document.querySelectorAll('.box').forEach((box)=>{
+    document.querySelectorAll('.box').forEach((box) => {
         box.addEventListener("click", onclick)
     })
     startTimer()
 }
 
-function onclick(event){
-    if (event.target.className.indexOf('selected')==-1){
+function onclick(event) {
+    if (event.target.className.indexOf('selected') == -1) {
         event.target.className += ' selected'
-        
+
         checkAnswer(+event.target.textContent)
 
     }
 }
 
-function checkAnswer(txtContent){
+function checkAnswer(txtContent) {
     let correctEl = document.querySelector('.correct')
     let incorrectEl = document.querySelector('.incorrect')
     let isCorrect = false
-    if(SELECTION_TYPE =='ODD'){
-        if(txtContent % 2 != 0){
+    if (SELECTION_TYPE == 'ODD') {
+        if (txtContent % 2 != 0) {
             isCorrect = true
         }
-    }else if(SELECTION_TYPE == 'EVEN'){
-            if (txtContent % 2 == 0){
+    } else if (SELECTION_TYPE == 'EVEN') {
+        if (txtContent % 2 == 0) {
             isCorrect = true
-            }
+        }
     }
-    if(isCorrect){
-        let currentHt = +correctEl.style.height.toString().replace('%','')
-        currentHt += (100/13)
-        correctEl.style.height =currentHt +'%'
-    }else {
-        let currentHt = +incorrectEl.style.height.toString().replace('%','')
-        currentHt += (100/13)
-        incorrectEl.style.height=currentHt +'%'}
-    
+    if (isCorrect) {
+        let currentHt = +correctEl.style.height.toString().replace('%', '')
+        currentHt += (100 / 13)
+        correctEl.style.height = currentHt + '%'
+    } else {
+        let currentHt = +incorrectEl.style.height.toString().replace('%', '')
+        currentHt += (100 / 13)
+        incorrectEl.style.height = currentHt + '%'
+    }
+
 }
-function showPlacard(){
+function showPlacard() {
     let placardtxt = document.querySelector('.placard').textContent
-    let arr = ['ODD','EVEN']
-let index = +(Math.random()>.5)
+    let arr = ['ODD', 'EVEN']
+    let index = +(Math.random() > .5)
     SELECTION_TYPE = arr[index]
     placardtxt = placardtxt.replace('xxx', SELECTION_TYPE)
     document.querySelector('.placard').textContent = placardtxt
-    animatePlacard(0,1)
-    setTimeout(()=>{
+    animatePlacard(0, 1)
+    setTimeout(() => {
         startTimer()
-        animatePlacard(1,0)
-    },5000)
-    setTimeout(()=>{
+        animatePlacard(1, 0)
+    }, 5000)
+    setTimeout(() => {
         startGame()
-        document.querySelector('.placard').className+=' hidden'
-    },5000)
+        document.querySelector('.placard').className += ' hidden'
+    }, 5000)
 
 }
-function animatePlacard(initial,final){
+function animatePlacard(initial, final) {
     document.querySelector('.placard').animate([
         {
-            opacity:initial,
+            opacity: initial,
         },
         {
-            opacity:final,
+            opacity: final,
         }
 
-    ],{
-        duration:1000,
-        fill:'forwards'
+    ], {
+        duration: 1000,
+        fill: 'forwards'
     })
 
 }
 
-const showScore = () =>{
-    
+const showScore = (currentHt) => {
+    let numStars = Math.floor(currentHt / 20)
+    var placard = document.querySelector('.placard')
+    if(numStars>1){
+    placard.textContent = "You Won "
+    }else{placard.textContent= "YOU LOSE "}
+    var section = document.createElement('section')
+    placard.appendChild(section)
+    placard.classList.remove('hidden')
+    while (numStars > 0) {
+        let image = document.createElement('img')
+        image.src = './images/littlestar.png'
+        section.appendChild(image)
+        numStars--
+    } 
+    animatePlacard(0,1)
 }
 
 shuffleNumbers()

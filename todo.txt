@@ -6,6 +6,8 @@ Done:
     starting the timer/game
         provide a message to select either odd or even
         10 for right answer -2 for wrong answer
+    Show the final score in a dialog box
+
 
 
 
@@ -14,4 +16,3 @@ Done:
 
 Todo:
     adding the score:-
-    Show the final score in a dialog box
